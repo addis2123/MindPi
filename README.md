@@ -1,2 +1,37 @@
 # MindPi
-A Neat Neural Network implementation on baremetal
+
+MindPi is a NEAT-inspired neural network implemented on Raspberry Pi 3B+ bare metal (64-bit mode).  
+Its goal is to provide a live-trainable "mind" for robotic pets.
+
+## Core input model
+
+- A remote controller places inputs on the first 4 GPIO pins.
+- Inputs represent:
+  - positive reinforcement (reward/increase desired behavior)
+  - negative reinforcement (remove negative condition to increase desired behavior)
+  - punishment signal (decrease undesired behavior)
+  - one auxiliary/control signal (final meaning is implementation-defined)
+
+## Memory and persistence model
+
+- The network is organized for partial save/load from SD card files.
+- Network sections are loaded into memory on demand so models can be larger than available RAM.
+- Sections are expected to be partitioned by model structure (for example: layer blocks, neuron groups, or connection blocks).
+- Memory layout should be tuned to leverage:
+  - registers
+  - cache
+  - RAM size limits (Pi 3B+ provides ~1GB system RAM, with less practically available to the runtime)
+
+## Training modes
+
+- A **dreaming state** supports background training on basic tasks such as:
+  - walking
+  - navigation
+- Initial mind creation may require extended dream-time (hours to days, depending on network size) before user-led training begins.
+
+## Performance roadmap
+
+- Investigate using the onboard GPU to assist computation.
+- GPU acceleration is exploratory: VideoCore IV bare-metal workflows are complex and should be treated as a research path.
+- Provide an optimizer that reorganizes saved network segments to improve load/unload behavior.
+- Keep persisted network files compact, clean, and efficient over time.

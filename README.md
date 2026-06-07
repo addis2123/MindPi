@@ -5,7 +5,7 @@ Its goal is to provide a live-trainable "mind" for robotic pets.
 
 ## Core input model
 
-- A remote places inputs on the first 4 GPIO pins.
+- A remote controller places inputs on the first 4 GPIO pins.
 - Inputs represent:
   - positive reinforcement (reward/increase desired behavior)
   - negative reinforcement (remove negative condition to increase desired behavior)
@@ -20,14 +20,14 @@ Its goal is to provide a live-trainable "mind" for robotic pets.
 - Memory layout should be tuned to leverage:
   - registers
   - cache
-  - RAM size limits
+  - RAM size limits (Pi 3B+ provides ~1GB system RAM, with less practically available to the runtime)
 
 ## Training modes
 
 - A **dreaming state** supports background training on basic tasks such as:
   - walking
   - navigation
-- Initial mind creation may require extended dream-time before user-led training begins.
+- Initial mind creation may require extended dream-time (hours to days, depending on network size) before user-led training begins.
 
 ## Performance roadmap
 

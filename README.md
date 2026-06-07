@@ -5,11 +5,12 @@ Its goal is to provide a live-trainable "mind" for robotic pets.
 
 ## Core input model
 
-- A remote places input on the first 4 GPIO pins.
+- A remote places inputs on the first 4 GPIO pins.
 - Inputs represent:
   - positive reinforcement
   - negative reinforcement
   - punishment signals
+  - one auxiliary/control signal (final meaning is implementation-defined)
 
 ## Memory and persistence model
 

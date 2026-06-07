@@ -35,3 +35,31 @@ Its goal is to provide a live-trainable "mind" for robotic pets.
 - GPU acceleration is exploratory: VideoCore IV bare-metal workflows are complex and should be treated as a research path.
 - Provide an optimizer that reorganizes saved network segments to improve load/unload behavior.
 - Keep persisted network files compact, clean, and efficient over time.
+
+## Bare-metal boot scaffold
+
+This repository now includes a minimal Raspberry Pi 3B+ bare-metal boot scaffold:
+
+- `src/start.S` startup entrypoint
+- `src/main.c` minimal kernel loop (GPIO blink)
+- `linker.ld` linker script targeting Pi kernel load address (`0x80000`)
+- `Makefile` that builds `build/kernel8.img`
+- `boot/config.txt` base boot configuration
+
+### Build
+
+Requires an AArch64 cross-toolchain (default prefix: `aarch64-none-elf-`):
+
+```bash
+make
+```
+
+Build output:
+
+- `build/kernel8.elf`
+- `build/kernel8.img`
+
+### SD card boot files
+
+Copy `build/kernel8.img` and `boot/config.txt` to the SD card boot partition along with Raspberry Pi firmware files (`bootcode.bin`, `start.elf`, `fixup.dat`).
+See `/boot/README.md` for details.
